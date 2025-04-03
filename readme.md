@@ -1,0 +1,1 @@
+This is a small personnal project I wanted to try after seeing Veritasium video about Axelrod tournament.
