@@ -1,0 +1,5 @@
+{
+    "nb_rounds": 200,
+    "probabilistic_error": 10,
+    "players": ["TitForTat","TitForTwoTat", "Kind", "Nasty","KindMajority","NastyMajority", "Opportunist","randomPlayer","RandomTry"]
+}

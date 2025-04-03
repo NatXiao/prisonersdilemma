@@ -10,12 +10,14 @@ class PrisonersDilemma:
     player0: Player
     player1: Player
     nb_round: int
-    probabilistic: int = 10
+    probabilistic : int
+    
 
-    def __init__(self, player0: Player, player1: Player, nb_round: int = 200):
+    def __init__(self, player0: Player, player1: Player, nb_round: int = 200, probabilistic: int = 10):
         self.player0 = player0
         self.player1 = player1
         self.nb_round = nb_round
+        self.probabilistic = probabilistic
 
     def simulateRound(self):
         ans0 = self.player0.decide()
