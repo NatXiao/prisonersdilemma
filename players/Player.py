@@ -5,7 +5,7 @@ class Player:
     def getPoint(self, res: int):
         self.points.append(res)
 
-    def decide(self, res: bool):
+    def decide(self):
         raise NotImplemented()
 
     def printPoint(self):
