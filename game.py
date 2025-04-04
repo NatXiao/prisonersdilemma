@@ -1,5 +1,5 @@
 import random
-from players.Player import Player
+from Player import Player
 from players.TitForTat import TitForTat
 from players.randomPlayer import RandomPlayer
 from players.NonForgiver import NonForgiver

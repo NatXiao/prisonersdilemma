@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 from game import PrisonersDilemma
 import configLoader
+from PlayersLoader import loadPlayerClass
 
 class GUI:
     def __init__(self, root):
@@ -18,11 +19,13 @@ class GUI:
         self.label_title = ttk.Label(root, text="Simulation du Dilemme du Prisonnier", font=("Arial", 16))
         self.label_title.pack()
 
+        self.algoClasses = loadPlayerClass()
+
         # Choix de l'algorithme pour le joueur 1
         ttk.Label(self.main_frame, text="Joueur 1 :").grid(column=0, row=1, sticky=W)
         self.algo0val = StringVar()
         self.algo0 = ttk.Combobox(self.main_frame, textvariable=self.algo0val, state="readonly")
-        self.algo0["values"] = self.config["players"]
+        self.algo0["values"] = list(self.algoClasses.keys()) #self.config["players"]
         self.algo0.grid(column=1, row=1, padx=5, pady=5)
         self.algo0.current(0)  # Sélection par défaut
 
@@ -30,7 +33,7 @@ class GUI:
         ttk.Label(self.main_frame, text="Joueur 2 :").grid(column=0, row=2, sticky=W)
         self.algo1val = StringVar()
         self.algo1 = ttk.Combobox(self.main_frame, textvariable=self.algo1val, state="readonly")
-        self.algo1["values"] = self.config["players"]
+        self.algo1["values"] = list(self.algoClasses.keys()) #self.config["players"]
         self.algo1.grid(column=1, row=2, padx=5, pady=5)
         self.algo1.current(1)
 
@@ -50,13 +53,17 @@ class GUI:
         self.result_label2.grid(column=0, row=5, columnspan=2, pady=10)
 
     def start_simulation(self):
-        algo1 = self.algo0val.get()
-        algo2 = self.algo1val.get()
+        algo1name = self.algo0val.get()
+        algo1 = self.algoClasses[algo1name]
+        algo2name = self.algo1val.get()
+        algo2 = self.algoClasses[algo2name]
         proba = self.spinboxnoise.get()
+        
 
-        self.result_label.config(text=f"Simulation entre {algo1} et {algo2}")
-        game = PrisonersDilemma(algo1, algo2, self.config["nb_rounds"], proba)
-        self.result_label2.config(text=(game.player0.printPoint() + " "+ game.player1.printPoint()))
+        self.result_label.config(text=f"Simulation entre {algo1name} et {algo2name}")
+        self.game = PrisonersDilemma(algo1, algo2, self.config["nb_rounds"], proba)
+        self.game.launch()
+        self.result_label2.config(text=(self.game.player0.printPoint() + " "+ self.game.player1.printPoint()))
 
 root = Tk()
 app = GUI(root)
