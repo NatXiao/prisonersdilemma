@@ -3,6 +3,7 @@ from tkinter import ttk
 from game import PrisonersDilemma
 import configLoader
 from PlayersLoader import loadPlayerClass
+from Player import Player
 
 class GUI:
     def __init__(self, root):
@@ -42,6 +43,14 @@ class GUI:
         self.spinval = StringVar()
         self.spinboxnoise = ttk.Spinbox(self.main_frame, from_=1.0, to=100.0, textvariable=self.spinval)
         self.spinboxnoise.grid(column=1, row=3, padx=4, pady=3)
+        self.spinval.set(10)
+
+        #change number of round
+        ttk.Label(self.main_frame, text="Number of round").grid(column=2, row=3, sticky=W)
+        self.spinval1 = StringVar()
+        self.spinboxround1 = ttk.Spinbox(self.main_frame, from_=1.0, to=1000.0, textvariable=self.spinval1)
+        self.spinboxround1.grid(column=3, row=3, padx=4, pady=3)
+        self.spinval1.set(200)
 
         self.start_button = ttk.Button(self.main_frame, text="Lancer la simulation", command=self.start_simulation)
         self.start_button.grid(column=0, row=4, columnspan=2, pady=10)
@@ -54,14 +63,14 @@ class GUI:
 
     def start_simulation(self):
         algo1name = self.algo0val.get()
-        algo1 = self.algoClasses[algo1name]
+        algo1= self.algoClasses[algo1name]()
         algo2name = self.algo1val.get()
-        algo2 = self.algoClasses[algo2name]
-        proba = self.spinboxnoise.get()
-        
+        algo2 = self.algoClasses[algo2name]()
+        proba = int(self.spinboxnoise.get())
+        nbround = int(self.spinboxround1.get())
 
         self.result_label.config(text=f"Simulation entre {algo1name} et {algo2name}")
-        self.game = PrisonersDilemma(algo1, algo2, self.config["nb_rounds"], proba)
+        self.game = PrisonersDilemma(algo1, algo2, nbround, proba)
         self.game.launch()
         self.result_label2.config(text=(self.game.player0.printPoint() + " "+ self.game.player1.printPoint()))
 

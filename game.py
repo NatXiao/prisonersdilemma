@@ -14,6 +14,7 @@ class PrisonersDilemma:
     
 
     def __init__(self, player0: Player, player1: Player, nb_round: int = 200, probabilistic: int = 10):
+        assert(probabilistic >0 and 100> probabilistic)
         self.player0 = player0
         self.player1 = player1
         self.nb_round = nb_round

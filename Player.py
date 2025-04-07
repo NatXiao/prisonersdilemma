@@ -10,6 +10,7 @@ class Player:
 
     def printPoint(self):
         print(sum(self.points))
+        return str(sum(self.points))
 
     def updateOpponentsMove(self, ans: bool):
         self.opponentsMove.append(ans)
