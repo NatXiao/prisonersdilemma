@@ -9,7 +9,8 @@ class Player:
         raise NotImplemented()
 
     def printPoint(self):
-        print(sum(self.points))
+        print("in printpoint", sum(self.points))
+        print(self.points)
         return str(sum(self.points))
 
     def updateOpponentsMove(self, ans: bool):

@@ -10,14 +10,14 @@ class GUI:
 
         self.root = root
         self.root.title("Prisoner's Dilemma")
-        self.root.geometry("400x300")
+        self.root.geometry("700x700")
 
         self.config = configLoader.load_config()
 
         self.main_frame = ttk.Frame(root, padding="10")
         self.main_frame.pack(fill=BOTH, expand="10")
 
-        self.label_title = ttk.Label(root, text="Simulation du Dilemme du Prisonnier", font=("Arial", 16))
+        self.label_title = ttk.Label(root, text="Simulation Prisonner's dilemma", font=("Arial", 16))
         self.label_title.pack()
 
         self.algoClasses = loadPlayerClass()
@@ -31,25 +31,25 @@ class GUI:
         self.algo0.current(0)  # Sélection par défaut
 
         # Choix de l'algorithme pour le joueur 2
-        ttk.Label(self.main_frame, text="Joueur 2 :").grid(column=0, row=2, sticky=W)
+        ttk.Label(self.main_frame, text="Joueur 2 :").grid(column=2, row=1, sticky=W)
         self.algo1val = StringVar()
         self.algo1 = ttk.Combobox(self.main_frame, textvariable=self.algo1val, state="readonly")
         self.algo1["values"] = list(self.algoClasses.keys()) #self.config["players"]
-        self.algo1.grid(column=1, row=2, padx=5, pady=5)
+        self.algo1.grid(column=3, row=1, padx=5, pady=5)
         self.algo1.current(1)
 
         # Add noise
-        ttk.Label(self.main_frame, text="Add noise").grid(column=0, row=3, sticky=W)
+        ttk.Label(self.main_frame, text="Add noise").grid(column=0, row=2, sticky=W)
         self.spinval = StringVar()
         self.spinboxnoise = ttk.Spinbox(self.main_frame, from_=1.0, to=100.0, textvariable=self.spinval)
-        self.spinboxnoise.grid(column=1, row=3, padx=4, pady=3)
+        self.spinboxnoise.grid(column=1, row=2, padx=4, pady=3)
         self.spinval.set(10)
 
         #change number of round
-        ttk.Label(self.main_frame, text="Number of round").grid(column=2, row=3, sticky=W)
+        ttk.Label(self.main_frame, text="Number of round").grid(column=2, row=2, sticky=W)
         self.spinval1 = StringVar()
         self.spinboxround1 = ttk.Spinbox(self.main_frame, from_=1.0, to=1000.0, textvariable=self.spinval1)
-        self.spinboxround1.grid(column=3, row=3, padx=4, pady=3)
+        self.spinboxround1.grid(column=3, row=2, padx=4, pady=3)
         self.spinval1.set(200)
 
         self.start_button = ttk.Button(self.main_frame, text="Lancer la simulation", command=self.start_simulation)
@@ -57,9 +57,9 @@ class GUI:
 
         # Zone d'affichage des résultats
         self.result_label = ttk.Label(self.main_frame, text="", font=("Arial", 12))
-        self.result_label.grid(column=0, row=4, columnspan=2, pady=10)
+        self.result_label.grid(column=0, row=5, columnspan=2, pady=10)
         self.result_label2 = ttk.Label(self.main_frame, text="", font=("Arial", 12))
-        self.result_label2.grid(column=0, row=5, columnspan=2, pady=10)
+        self.result_label2.grid(column=0, row=7, columnspan=2, pady=10)
 
     def start_simulation(self):
         algo1name = self.algo0val.get()

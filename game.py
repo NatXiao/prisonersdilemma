@@ -39,12 +39,14 @@ class PrisonersDilemma:
         self.player1.updateOpponentsMove(ans0)
 
     def addError(self, res: bool):
-        if random.random() * 100 > self.probabilistic:
+        if (random.random() * 100) > self.probabilistic:
             return res
         else:
             return not res
 
     def launch(self):
+        self.player0.points = []
+        self.player1.points = []
         for i in range(self.nb_round):
             self.simulateRound()
         self.player0.printPoint()
@@ -54,5 +56,5 @@ class PrisonersDilemma:
 algo0 = TitForTwoTat()
 algo1 = NonForgiver()
 
-game = PrisonersDilemma(player0=algo0, player1=algo1)
-game.launch()
+#game = PrisonersDilemma(player0=algo0, player1=algo1)
+#game.launch()
