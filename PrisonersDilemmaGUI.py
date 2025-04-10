@@ -56,10 +56,26 @@ class GUI:
         self.start_button.grid(column=0, row=4, columnspan=2, pady=10)
 
         # Zone d'affichage des résultats
-        self.result_label = ttk.Label(self.main_frame, text="", font=("Arial", 12))
+        self.result_label = ttk.Label(self.main_frame, text="Resultat", font=("Arial", 12))
         self.result_label.grid(column=0, row=5, columnspan=2, pady=10)
         self.result_label2 = ttk.Label(self.main_frame, text="", font=("Arial", 12))
         self.result_label2.grid(column=0, row=7, columnspan=2, pady=10)
+        self.state = ttk.Label(self.main_frame, text="Both cooperated")
+        self.state.grid(column=0, row=9)
+        self.state2 = ttk.Label(self.main_frame, text="One cooperated")
+        self.state2.grid(column=0, row=10)
+        self.state3 = ttk.Label(self.main_frame, text="One cooperated")
+        self.state3.grid(column=0, row=11)
+        self.state4 = ttk.Label(self.main_frame, text="None cooperated")
+        self.state4.grid(column=0, row=12)
+        self.displayState = ttk.Label(self.main_frame, text="", font=("Arial", 12))
+        self.displayState.grid(column=1, row=9, columnspan=2, pady=10)
+        self.displayState1 = ttk.Label(self.main_frame, text="", font=("Arial", 12))
+        self.displayState1.grid(column=1, row=10, columnspan=2, pady=10)
+        self.displayState2 = ttk.Label(self.main_frame, text="", font=("Arial", 12))
+        self.displayState2.grid(column=1, row=11, columnspan=2, pady=10)
+        self.displayState3 = ttk.Label(self.main_frame, text="", font=("Arial", 12))
+        self.displayState3.grid(column=1, row=12, columnspan=2, pady=10)
 
     def start_simulation(self):
         algo1name = self.algo0val.get()
@@ -70,9 +86,15 @@ class GUI:
         nbround = int(self.spinboxround1.get())
 
         self.result_label.config(text=f"Simulation entre {algo1name} et {algo2name}")
+        self.state2.config(text=f"{algo1name} cooperated")
+        self.state3.config(text=f"{algo2name} cooperated")
         self.game = PrisonersDilemma(algo1, algo2, nbround, proba)
         self.game.launch()
         self.result_label2.config(text=(self.game.player0.printPoint() + " "+ self.game.player1.printPoint()))
+        self.displayState.config(text= f"{self.game.gameState[0]}")
+        self.displayState1.config(text= f"{self.game.gameState[1]}")
+        self.displayState2.config(text= f"{self.game.gameState[2]}")
+        self.displayState3.config(text= f"{self.game.gameState[3]}")
 
 root = Tk()
 app = GUI(root)
